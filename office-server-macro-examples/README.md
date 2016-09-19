@@ -21,7 +21,9 @@ Clone and build the [Open XML SDK] (https://github.com/OfficeDev/Open-XML-SDK). 
 Lib folder of the example.
 
 Open FVTermSvrMacros.sln in VS and compile it, there is a post build event which will copy 3 dlls to C:\ProgramData\Inventu\FlowMacros\Insure\__Public\ServerMacros
-so that they can be found by FVTerm. If the copy step fails, 1st check that the folder exists and that you have permissions to write to it. If the copy has worked
+so that they can be found by FVTerm.
+
+If the copy step fails, 1st check that the folder exists and that you have permissions to write to it. If the copy has worked
 in the past, then it may be that the dlls are in use by IIS. To resolve this restart IIS by opening a cmd prompt as Admin and typing iisreset.
 
 ======================================================
@@ -84,9 +86,9 @@ All of the C# code for the examples can be found in the OpenXmlSvrMacros project
 ======================================================
 Working with merge fields in Word
 ======================================================
-ALT-F9 - will toggle the expanded display of merge fields on and off.
-CTRL-F9 - will insert a new merge field into the document.
-F9 - will refresh the fields in the document.
+* ALT-F9 - will toggle the expanded display of merge fields on and off.
+* CTRL-F9 - will insert a new merge field into the document.
+* F9 - will refresh the fields in the document.
 
 ======================================================
 Other Projects
