@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FlyConnector application="InsureRecog" version="1.0" debug="yes" specialAsBlanks="yes">
+  <Screen name="SysSelect" treatAsDefault="true" paddingMode="default" spaceType="blank" cursorHomeRow="22" cursorHomeColumn="15">
+    <Reference recFile="Insure.rec" timeStamp="16:05:41.682" name="SysSelect" />
+    <Comment>System selection screen</Comment>
+    <Recognize row="2" column="28" text="Info Access" type="include" spaceType="blank" />
+    <Recognize row="19" column="2" text="Menu" type="include" spaceType="blank" />
+  </Screen>
+  <Screen name="SignonComplete" treatAsDefault="true" paddingMode="default" spaceType="blank" cursorHomeRow="1" cursorHomeColumn="1">
+    <Reference recFile="Insure.rec" timeStamp="16:10:37.278" name="SignonComplete" />
+    <Comment>Displayed after successful signon</Comment>
+    <Recognize row="1" column="1" text="DFHC" type="include" spaceType="blank" />
+    <Recognize row="1" column="11" text="SIGN-ON" type="include" spaceType="blank" />
+    <Recognize row="1" column="22" text="COMPLETE" type="include" spaceType="blank" />
+  </Screen>
+  <Screen name="SelectCompany" treatAsDefault="true" floatingWindow="true" refCols="80" paddingMode="default" spaceType="blank" cursorHomeRow="9" cursorHomeColumn="28">
+    <Reference recFile="InsureSelPopup.rec" timeStamp="15:17:00.562" name="SelectCompany" />
+    <Recognize row="6" column="33" text="Select" type="include" spaceType="blank" />
+    <Recognize row="6" column="40" text="Company" type="include" spaceType="blank" />
+  </Screen>
+  <Screen name="PolicySelect" treatAsDefault="true" paddingMode="default" spaceType="blank" cursorHomeRow="4" cursorHomeColumn="33">
+    <Reference recFile="Insure.rec" timeStamp="16:14:20.318" name="PolicySelect" />
+    <Comment>Select a policy based on company and account</Comment>
+    <Recognize row="2" column="2" text="VCM0500" type="include" spaceType="blank" />
+  </Screen>
+  <Screen name="AccountNotFound" treatAsDefault="true" paddingMode="default" spaceType="null">
+    <Reference recFile="InsureErrors.rec" timeStamp="14:00:02.997" name="AccountNotFound" />
+    <Recognize row="1" column="2" text="Account:" type="include" spaceType="blank" />
+    <Recognize row="16" column="33" text="NOT FOUND-" type="include" spaceType="blank" />
+  </Screen>
+  <Screen name="AcctSummary" treatAsDefault="true" paddingMode="default" spaceType="blank" cursorHomeRow="1" cursorHomeColumn="11">
+    <Reference recFile="Insure.rec" timeStamp="16:33:01.190" name="AcctSummary" />
+    <Comment>Account Summary Screen - Billing Information</Comment>
+    <Recognize row="1" column="74" text="XYL1001" type="include" spaceType="blank" />
+    <FieldMap name="default">
+		<Field name="Plan" row="4" column="11" length="27" action="read"/>
+		<Field name="Status" row="4" column="47" length="30" action="read"/>
+		<Field name="AccountHolder" row="5" column="8" length="30" action="read"/>
+		<Field name="Address1" row="6" column="8" length="30" action="read"/>
+		<Field name="Address2" row="7" column="8" length="30" action="read"/>
+		<Field name="Address3" row="8" column="8" length="30" action="read"/>
+		<Field name="City" row="9" column="8" length="20" action="read"/>
+		<Field name="PostCode" row="10" column="29" length="13" action="read"/>
+		<Field name="TelNo" row="10" column="8" length="14"/>
+		<Field name="Agent" row="5" column="47" length="30" action="read"/>
+		<Field name="AgentAddress1" row="6" column="47" length="30" action="read"/>
+		<Field name="AgentAddress2" row="7" column="47" length="30" action="read"/>
+		<Field name="AgentAddress3" row="8" column="47" length="30" action="read"/>
+		<Field name="AgentCity" row="9" column="47" length="20" action="read"/>
+		<Field name="AgentPostCode" row="10" column="68" length="13" action="read"/>
+		<Field name="AgentTelNo" row="10" column="47" length="14" action="read"/>
+		<Field name="Inception" row="12" column="21" length="8" action="read"/>
+		<Field name="DueDate" row="13" column="21" length="8" action="read"/>
+		<Field name="NextBill" row="14" column="21" length="8" action="read"/>
+		<Field name="NextAction" row="15" column="21" length="8" action="read"/>
+		<Field name="LastPayment" row="16" column="21" length="8" action="read"/>
+		<Field name="LastActivity" row="17" column="21" length="8" action="read"/>
+		<Field name="AccountPayer" row="18" column="21" length="8" action="read"/>
+		<Field name="InsuredMinDue" row="19" column="22" length="13" adjust="right" action="read"/>
+		<Field name="InsuredBalance" row="20" column="22" length="13" adjust="right" action="read"/>
+		<Field name="TotalMinDue" row="21" column="22" length="13" adjust="right" action="read"/>
+		<Field name="TotalBalance" row="22" column="22" length="13" adjust="right" action="read"/>
+		<Field name="PaymentMethod" row="12" column="58" length="20" action="read"/>
+		<Field name="BillDay" row="13" column="58" length="9" action="read"/>
+		<Field name="SuspendBilling" row="14" column="58" length="20" action="read"/>
+		<Field name="NextActionReason" row="15" column="58" length="20" action="read"/>
+		<Field name="UnpaidNSF" row="16" column="58" length="20" action="read"/>
+		<Field name="CancelOutstanding" row="17" column="58" length="20" action="read"/>
+		<Field name="RemarksPresent" row="18" column="58" length="20" action="read"/>
+		<Field name="EstNextBill" row="19" column="58" length="13" action="read"/>
+		<Field name="ServiceCharge" row="20" column="58" length="13" action="read"/>
+		<Field name="PendingCash" row="21" column="58" length="13" action="read"/>
+		<Field name="CashEnteredToday" row="22" column="58" length="13" action="read"/>
+	</FieldMap>
+  </Screen>
+  <Screen name="PolicyList" treatAsDefault="true" paddingMode="default" spaceType="blank" cursorHomeRow="1" cursorHomeColumn="11">
+    <Reference recFile="Insure.rec" timeStamp="16:34:19.012" name="PolicyList" />
+    <Comment>Account Information- Policy List</Comment>
+    <Recognize row="1" column="74" text="XYL1002" type="include" spaceType="blank" />
+    <Recognize row="2" column="37" text="Policy" type="include" spaceType="blank" />
+    <Recognize row="2" column="44" text="List" type="include" spaceType="blank" />
+  </Screen>
+  <Screen name="AcctTrans" treatAsDefault="true" paddingMode="default" spaceType="blank" cursorHomeRow="1" cursorHomeColumn="11">
+    <Reference recFile="Insure.rec" timeStamp="16:38:31.926" name="AcctTrans" />
+    <Comment>Account Transactions list screen</Comment>
+    <Recognize row="1" column="74" text="XYL1003" type="include" spaceType="blank" />
+    <Recognize row="24" column="2" text="F1=Help" type="include" spaceType="blank" />
+    <FieldMap name="default">
+		<Field name="MoreIndicator" row="23" column="73" length="7"/>
+	</FieldMap>
+	<FieldMap name="rowData">
+		<Field name="Date" row="9" column="4" length="6"/>
+		<Field name="Action" row="9" column="11" length="16"/>
+		<Field name="EffDue" row="9" column="28" length="6"/>
+		<Field name="Amount" row="9" column="37" length="8"/>
+		<Field name="MinDue" row="9" column="49" length="7"/>
+		<Field name="Description" row="9" column="57" length="12"/>
+		<Field name="LOB" row="9" column="76" length="4"/>
+	</FieldMap>
+  </Screen>
+  <Screen name="AcctInvoices" treatAsDefault="true" paddingMode="default" spaceType="blank" cursorHomeRow="1" cursorHomeColumn="1">
+    <Reference recFile="Insure.rec" timeStamp="16:57:23.012" name="AcctInvoices" />
+    <Comment>The Invoices that have been sent</Comment>
+    <Recognize row="1" column="74" text="XYL1004" type="include" spaceType="blank" />
+  </Screen>
+  <Screen name="AcctUpdate" treatAsDefault="true" paddingMode="default" spaceType="blank">
+    <Reference recFile="InsureAcctUpdateError.rec" timeStamp="11:22:14.750" name="AcctUpdate" />
+    <Comment>Account Update screen</Comment>
+    <Recognize row="1" column="74" text="XYL1002" type="include" spaceType="blank" />
+    <Recognize row="2" column="35" text="Account" type="include" spaceType="blank" />
+    <Recognize row="2" column="43" text="Update" type="include" spaceType="blank" />
+    <Recognize row="10" column="9" text="CHANGES HAVE BEEN POSTED" type="omit" spaceType="blank" />
+  </Screen>
+  <Screen name="AcctUpdatePosted" treatAsDefault="true" paddingMode="default" spaceType="blank" cursorHomeRow="1" cursorHomeColumn="11">
+    <Reference recFile="Insure.rec" timeStamp="17:08:52.664" name="AcctUpdatePosted" />
+    <Comment>Notification that account updates have been posted</Comment>
+    <Recognize row="1" column="74" text="XYL1002" type="include" spaceType="blank" />
+    <Recognize row="2" column="35" text="Account" type="include" spaceType="blank" />
+    <Recognize row="2" column="43" text="Update" type="include" spaceType="blank" />
+    <Recognize row="10" column="9" text="CHANGES HAVE BEEN POSTED" type="include" spaceType="blank" />
+  </Screen>
+  <Screen name="MyClearScreen" treatAsDefault="true" paddingMode="default" spaceType="blank" cursorHomeRow="1" cursorHomeColumn="1">
+    <Reference recFile="Insure.rec" timeStamp="16:12:48.116" name="MyClearScreen" />
+    <Recognize text="clear" type="special" spaceType="blank" />
+  </Screen>
+  <Screen name="Signon" treatAsDefault="true" paddingMode="default" spaceType="blank">
+    <Reference recFile="Insure.rec" timeStamp="16:08:11.428" name="Signon" />
+    <Comment>Signon for the SICS System</Comment>
+    <Recognize row="1" column="25" text="Signon" type="include" spaceType="blank" />
+    <Recognize row="1" column="36" text="SICS" type="include" spaceType="blank" />
+  </Screen>
+  <Screen name="PolicyDetail" treatAsDefault="true" paddingMode="default" spaceType="blank">
+    <Reference recFile="InsureDetails.rec" timeStamp="14:08:34.516" name="PolicyDetail" />
+    <Comment>Details for a specific policy</Comment>
+    <Recognize row="2" column="37" text="Policy" type="include" spaceType="blank" />
+    <Recognize row="2" column="37" text="Policy" type="include" spaceType="blank" />
+    <Recognize row="2" column="44" text="Detail" type="include" spaceType="blank" />
+    <Recognize row="2" column="44" text="Detail" type="include" spaceType="blank" />
+  </Screen>
+  <ScreenGroup name="StartGroup" virtual="yes">
+    <Comment>Initial screen displayed</Comment>
+    <Recognize row="1" column="27" text="M U L T X T E R M" type="include" spaceType="blank" />
+    <Recognize row="10" column="3" text="SWITCHIT" type="include" spaceType="blank" />
+    <Screen name="Start" treatAsDefault="true" paddingMode="default" spaceType="blank">
+      <Reference recFile="Insure.rec" timeStamp="15:58:55.308" name="Start" />
+      <Recognize row="24" column="3" text="                " type="include" spaceType="null" />
+    </Screen>
+    <Screen name="StartError" treatAsDefault="true" paddingMode="default" spaceType="blank">
+      <Reference recFile="InsureErrors.rec" timeStamp="13:59:14.325" name="StartError" />
+      <Recognize row="24" column="3" text="          " type="omit" spaceType="blank" />
+    </Screen>
+  </ScreenGroup>
+  <Screen name="AcctTransTall" treatAsDefault="true" paddingMode="default" spaceType="blank">
+    <Reference recFile="Insure.rec" timeStamp="17:11:08.158" name="AcctTransTall" />
+    <Recognize row="1" column="74" text="XYL1003" type="include" spaceType="blank" />
+    <Recognize row="43" column="2" text="F1=Help" type="include" spaceType="blank" />
+  </Screen>
+</FlyConnector>

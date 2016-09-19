@@ -1,0 +1,1698 @@
+<SimHost protocol="tn3270" normalRows="24" normalColumns="80" altRows="43" altColumns="80">
+<GlobalAid key="clear">
+	<ScreenSwitch screen="ClearScreen"/>
+</GlobalAid>
+<!-- Screen defaults - type="normal" formatted="yes" clear="yes"-->
+<Screen name="welcome" clear="yes">
+	<Map framed="yes" type="normal" formatted="yes"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 }02/25/2004}              M U L T X T E R M / X M S   V9.2.5}MULTI   }TIMMY508  
+ 2 }13:25:26}                    USER PROFILE                  }Lvl:}000}TCP00207  
+ 3 }------------------------------------------------------------------------------ 
+ 4 ]                                                                               
+ 5 ] ********************* SIMHOST/ESA SWITCH IS ACTIVE ********************       
+ 6 ]                                          .____________________________.       
+ 7 ]                                          |     __________________     |       
+ 8 ]         Welcome to:                  .__________________________. \   |       
+ 9 ]                                      |     _________________    |  |  |       
+10 ] SWITCHIT - THE FENS MARINE       __________________________. \  |  |  |       
+11 ]                                  |    _________________    |  | |  |  |       
+12 ]   FAMILY OF INSURANCE COMPANIES  |  / X   X M   M  SSSS \  |  | |  |  |       
+13 ]                                  | |   X X  MM MM S      | |  | |  |  |       
+14 ] SESSION MANAGER - VERSION 4.2.7  | |    X   M M M  SSS   | |  | | /   |       
+15 ]                                  | |   X X  M   M     S  | | /  |     |       
+16 ]      BURN LEVEL 023              | |  X   X M   M SSSS   | |    |_____!       
+17 ]                                  |  \ _________________ /  |____!             
+18 ]                                  !_________________________!                  
+19 ]                                                                               
+20 }------------------------------------------------------------------------------ 
+21 }                                                                               
+22 ]     User Profile==>[        ]    User Password==>^        ]          ]        
+23 ]ENTER==> Process, CLEAR==> Logoff                                              
+24                                                                                 
+]]></Map>
+	<Script event="oninput">
+		<IfAid key="enter">
+			<IfScreen row="22" column="23" text="Simmy">
+				<ScreenSwitch screen="menu"/>
+			<Else/>
+				<PutScreen row="24" column="2" text="}User Profile not recognized (hint: Simmy)            "/>
+			</IfScreen>
+		<Else/>
+			<IfAid key="clear">
+				<CloseClient/>
+			</IfAid>
+			<PutScreen row="24" column="2" text="]Only keys}ENTER]and}CLEAR]are supported...          "/>
+		</IfAid>
+	</Script>
+ </Screen>
+ <Screen name="menu" clear="yes">
+	<Map framed="yes" type="normal" cursorRow="22" cursorColumn="15" formatted="yes" numFields="22,15"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 }02/25/2004}         M U L T X T E R M / X M S   V9.2.5}             }TIMMY508  
+ 2 }13:25:26                }*Info Access Direct*                       }TCP00207  
+ 3 }------------------------------------------------------------------------------ 
+ 4                                                                                 
+ 5                                                            ]Appl/      ]Time    
+ 6 ]Tag           ]Description of Selection                   ]Port       ]Away    
+ 7                                                                                 
+ 8 ]        [_] 1.]end this user session ..................   [        ]  ]        
+ 9 ]        [_] 2.]production sics ........................   [        ]  ]        
+10 ]        ] ]   ]                                           ]        ]  ]        
+11 ]        ] ]   ]                                           ]        ]  ]        
+12 ]        ] ]   ]                                           ]        ]  ]        
+13 ]        ] ]   ]                                           ]        ]  ]        
+14 ]        ] ]   ]                                           ]        ]  ]        
+15 ]        ] ]   ]                                           ]        ]  ]        
+16 ]        ] ]   ]                                           ]        ]  ]        
+17 ]        ] ]   ]                                           ]        ]  ]        
+18                                                                                 
+19 ]Menu==>]PA2 ], Toggle==>]    ] Goto==>]    ], Allow Watch==>]YES              
+20 }------------------------------------------------------------------------------ 
+21 }                                                                               
+22 ]Selection==>[  ]  ]Data==>[                    ]  ]Command==>[        ]        
+23 }ENTER==> Process, CLEAR==> Reset, PF3==> Previous Menu
+24 }
+]]></Map>
+	<Script event="oninput">
+		<IfAid key="enter">
+			<IfScreen row="22" column="15" text="1">
+				<ScreenSwitch screen="welcome"/>
+			</IfScreen>
+			<IfScreen row="22" column="15" text="2">
+				<ScreenSwitch screen="signon"/>
+			</IfScreen>
+			<PutScreen row="24" column="2" text="]Only options}1]and}2]are supported...         "/>
+		<Else/>
+			<IfAid key="clear">
+				<LoadMap name="default"/>
+				<SetCursor row="22" column="15"/>
+			</IfAid>
+			<IfAid key="pf3">
+				<ScreenSwitch screen="welcome"/>
+			</IfAid>
+			<PutScreen row="24" column="2" text="]Only keys}ENTER]and}CLEAR]are supported...    "/>
+		</IfAid>
+	</Script>
+</Screen>
+<Screen name="signon" clear="yes">
+	<Map framed="yes" type="normal" formatted="yes"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1                        }Signon for SICS/ESA Release 8.2.0       ]APPLID]PRDSICS 
+ 2                                                                                 
+ 3 }@@@@@@ WELCOME TO PRODSICS VERSION 8.2.  DRINK YOUR COFFEE @@@@@@                
+ 4 }                                                                               
+ 5 }                                                                               
+ 6 }                                                                               
+ 7                                                                                 
+ 8 ]Type your userid and password, then press ENTER:                               
+ 9                                                                                 
+10          ]Userid . . . .[        ]                    
+11          ]Password . . .^        ]                                              
+12          ]Language . . .[   ]                                                   
+13                                                                                 
+14      ]New Password . . .^        ]                                              
+15                                                                                 
+16                                                                                 
+17                                                                                 
+18                                                                                 
+19                                                                                 
+20                                                                                 
+21                                                                                 
+22 ~                                                                          ]    
+23 }                                             
+24 ]F3=Exit                                                                      ] 
+]]></Map>
+	<Script event="oninput">
+		<PutScreen row="23" column="2" text="                                              "/>
+		<IfAid key="enter">
+			<IfScreen row="10" column="26" text="Simmy">
+				<IfScreen row="11" column="26" text="Host">
+					<ScreenSwitch screen="signonComplete"/>
+				<Else/>
+					<SetCursor row="11" column="26"/>
+					<IfScreen row="11" column="26" text=" ">
+						<PutScreen row="23" column="2" text="DFHCE3530 PLEASE TYPE YOUR PASSWORD (hint: Host)      "/>
+					<Else/>
+						<PutScreen row="23" column="2" text="DFHCE3540 INVALID PASSWORD (hint: Host)               "/>
+					</IfScreen>
+				</IfScreen>
+			<Else/>
+				<SetCursor row="10" column="26"/>
+				<IfScreen row="10" column="26" text=" ">
+					<PutScreen row="23" column="2" text="DFHCE3520 PLEASE TYPE YOUR USERID (hint: Simmy)          "/>
+				<Else/>
+					<PutScreen row="23" column="2" 
+					text="DFHCE3520 USERID UNKNOWN (hint: Simmy)                          "/>
+				</IfScreen>
+			</IfScreen>
+		<Else/>
+			<IfAid key="pf3">
+				<ScreenSwitch screen="menu"/>
+			</IfAid>
+			<PutScreen row="23" column="2" text="                                                         "/>
+			<PutScreen row="24" column="2" text="]Only}ENTER]and}PF3]are supported.                          "/>
+		</IfAid>
+	</Script>
+ </Screen>
+ <Screen name="signonComplete" clear="yes">
+	<Map framed="yes" type="normal" formatted="no"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 DFHCE3549 SIGN-ON IS COMPLETE (LANGUAGE ENU).                                   
+ 2                                                                                 
+ 3                                                                                 
+ 4                                                                                 
+ 5                                                                                 
+ 6                                                                                 
+ 7                                                                                 
+ 8                                                                                 
+ 9                                                                                 
+10                                                                                 
+11                                                                                 
+12                                                                                 
+13                                                                                 
+14                                                                                 
+15                                                                                 
+16                                                                                 
+17                                                                                 
+18                                                                                 
+19                                                                                 
+20                                                                                 
+21                                                                                 
+22                                                                                 
+23                                                                                 
+24                                                                                 
+]]></Map>
+</Screen>
+<Screen name="clearScreen" clear="yes">
+	<Map framed="yes" type="normal" formatted="no" cursorRow="1" cursorColumn="1"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1                                                                                 
+ 2                                                                                 
+ 3                                                                                 
+ 4                                                                                 
+ 5                                                                                 
+ 6                                                                                 
+ 7                                                                                 
+ 8                                                                                 
+ 9                                                                                 
+10                                                                                 
+11                                                                                 
+12                                                                                 
+13                                                                                 
+14                                                                                 
+15                                                                                 
+16                                                                                 
+17                                                                                 
+18                                                                                 
+19                                                                                 
+20                                                                                 
+21                                                                                 
+22                                                                                 
+23                                                                                 
+24                                                                                 
+]]></Map>
+	<Script event="oninput">
+		<IfAid key="attn">
+			<ScreenSwitch screen="clearScreen"/>
+		</IfAid>
+		<IfAid key="clear">
+			<ScreenSwitch screen="clearScreen"/>
+		</IfAid>
+		<IfAid key="enter">
+			<IfScreen row="1" column="1" text="info">
+				<PutScreen row="-4" column="1" text="  "/>
+				<PutScreen row="-4" column="3" text="              "/>
+				<ScreenSwitch screen="search"/>
+			</IfScreen>
+			<PutScreen row="24" column="2" text="Only}info]will get you anywhere...use CLEAR to continue            "/>
+			<SetCursor row="1" column="1"/>
+		</IfAid>
+	</Script>
+</Screen>
+<Screen name="search" clear="yes">
+	<Map framed="yes" type="normal" formatted="yes" numFields="4,33|5,33|15,2"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ~HCB5]     Policy]    ]    ]          ] ]     Date]      ]      Claim]        ] 
+ 2 ]VCM0500                     ]Combined Info Menu]in}Production   }            ] 
+ 3                                                                  }            ] 
+ 4 ]Company  . . . . . . . . . . .{  ]                                             
+ 5 ]Account or policy  . . . . . .{              ]                                 
+ 6 ]Batch  . . . . . . . . . . . .{   ]                                            
+ 7 ]Pending cash corrections . . .{              ]                                 
+ 8 ]Group/List . . . . . . . . . .{              ]                                 
+ 9                                                                                 
+10 ]Last or business name. . . . .{                                   ]            
+11 ~First name . . . . . . . . . .}                ]                               
+12 ]Zip code . . . . . . . . . . .{     {       ]                                  
+13                                                                                 
+14 ]Select one of the following.     
+15 {          ]1. Account Status     
+16            ]2. Account Update     
+17            ]3. Alternate Screen Display (43 x 80) 
+18
+19
+20
+21
+22 }                                                                             ] 
+23 ]Command===> {XX                 ]                                              
+24 ]F1=Help  F3=Exit
+]]></Map>
+	<Script event="onLoad">
+		<LoadMap name="default"/>
+		<ScreenCopy fromRow="-4" fromColumn="1" toRow="4" toColumn="33" length="2"/>
+		<ScreenCopy fromRow="-4" fromColumn="3" toRow="5" toColumn="33" length="14"/>
+		<SendScreen clear="yes" unlock="yes"/>
+		<ReceiveInput/>
+	</Script>
+	<Script event="oninput">
+		<PutScreen row="-1" column="1" text=" "/>
+		<IfAid key="enter">
+			<IfScreen row="4" column="33" text="50">
+				<IfScreen row="5" column="33" text="12345677">
+					<PutScreen row="-4" column="1" text="  "/>
+					<PutScreen row="-4" column="3" text="              "/>
+					<IfScreen row="15" column="2" text="2 ">
+						<ScreenSwitch screen="acctEntry2"/>
+					</IfScreen>
+					<ScreenSwitch screen="billInfoAlt"/>
+				</IfScreen>
+				<IfScreen row="5" column="33" text="12345679">
+					<PutScreen row="-4" column="1" text="  "/>
+					<PutScreen row="-4" column="3" text="              "/>
+					<ScreenSwitch screen="invoice1"/>
+				</IfScreen>
+				<IfScreen row="5" column="33" text="12345678">
+					<PutScreen row="-4" column="1" text="  "/>
+					<PutScreen row="-4" column="3" text="              "/>
+					<IfScreen row="15" column="2" text="1 ">
+						<ScreenSwitch screen="billInfo"/>
+					</IfScreen>
+					<IfScreen row="15" column="2" text="2 ">
+						<PutScreen row="-14" column="21" text="09/09/10" />
+						<PutScreen row="-14" column="58" text="NO  " />
+						<ScreenSwitch screen="acctEntry"/>
+					</IfScreen>
+					<IfScreen row="15" column="2" text="3 ">
+						<ScreenSwitch screen="altScreen"/>
+					</IfScreen>
+					<IfScreen row="15" column="2" text="4 ">
+						<Sleep milliSeconds="500"/>
+						<ScreenSwitch screen="billInfo"/>
+					</IfScreen>
+					<SetCursor row="15" column="2"/>
+				<Else/>
+					<ScreenCopy fromRow="4" fromColumn="33" toRow="-4" toColumn="1" length="2"/>
+					<ScreenCopy fromRow="5" fromColumn="33" toRow="-4" toColumn="3" length="14"/>
+					<ScreenSwitch screen="notFound"/>
+				</IfScreen>
+			<Else/>
+				<ScreenSwitch screen="notFound"/>
+			</IfScreen>
+			<PutScreen row="23" column="2" text="}Hint: Company=50, Account=12345678, Select=1, 2 or 3]            "/>
+			<PutScreen row="-1" column="1" text="M"/>
+		</IfAid>
+		<IfAid key="pf3">
+			<ScreenSwitch screen="signon"/>
+		</IfAid>
+		<IfAid key="pf4">
+			<IfCursorAt row="4" column="33">
+				<ScreenCopy toRow="-4" toColumn="1" fromRow="4" fromColumn="33" length="2"/>
+				<ScreenCopy toRow="-4" toColumn="3" fromRow="5" fromColumn="33" length="14"/>
+				<ScreenSwitch screen="SelectCo"/>
+			</IfCursorAt>
+		</IfAid>
+		<IfAid key="clear">
+			<ScreenSwitch screen="clearScreen"/>
+		</IfAid>
+		<IfScreen row="-1" column="1" text=" ">
+			<PutScreen row="24" column="2" text="]Only}ENTER]and}PF3]are supported.                         "/>
+		</IfScreen>
+	</Script>
+</Screen>
+<Screen name="SelectCo" clear="yes">
+	<Map framed="yes" type="normal" formatted="yes" cursorRow="9" cursorColumn="28">
+	 <![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ~HCB5]     Policy]    ]    ]          ] ]     Date]      ]      Claim]        ] 
+ 2 ]VCM0500                     ]Combined Info Menu]in}Production   }            ] 
+ 3                                                                  }            ] 
+ 4 ]Company  . . . . . . . . . . .]  ]                                             
+ 5 ]Account or policy  . .}----------------------------------------------]
+ 6 ]Batch  . . . . . . . .}|]     }Select Company]                     }|]
+ 7 ]Pending cash correctio}|]Select=1                                  }|]
+ 8 ]Group/List . . . . . .}|]}?]}Code  ]}Name       ]                  }|]
+ 9                        }|]{ ] ]01]   ]First Indemnity Fish       ]  }|]
+10 ]Last or business name.}|]{ ] ]07]   ]Ben and Frank Underwriting ]  }|]
+11 ~First name . . . . . .}|]{ ] ]12]   ]A Dozen Insurance Buildings]  }|]
+12 ]Zip code . . . . . . .}|]{ ] ]13]   ]The Lucky Companies        ]  }|]
+13                        }|]{ ] ]20]   ]Over There Insurance       ]  }|]
+14 ]Select one of the foll}|]{ ] ]30]   ]Auto and Home Safety       ]  }|]
+15 {          ]1. Account }|]{ ] ]40]   ]Bed Bath and Insurance     ]  }|}
+16            ]2. Account }|]{ ] ]50]   ]Pick Me or Nothing Works!  ]  }|]
+17            ]3. Alternat}|]{ ] ]52]   ]Turn Back you Want 50      ]  }|]
+18                        }|]{ ] ]60]   ]The 60 Mistakes Agency     ]  }|]
+19                        }|]                             }     More...}|]
+20                        }|]]F3=Exit]            ]F8=Next             }|]
+21                        }|]                                        } }|]
+22 }                      }|]                                          }|]
+23 ]Command===> ]XX       }----------------------------------------------]
+24 ]F1=Help  F3=Exit
+]]></Map>
+	<Script event="oninput">
+		<IfAid key="Enter">
+			<IfScreen row="9" column="28" text="1">
+				<PutScreen row="-4" column="1" text="01"/>
+				<ScreenSwitch screen="search"/>
+			</IfScreen>
+			<IfScreen row="10" column="28" text="1">
+				<PutScreen row="-4" column="1" text="07"/>
+				<ScreenSwitch screen="search"/>
+			</IfScreen>
+			<IfScreen row="11" column="28" text="1">
+				<PutScreen row="-4" column="1" text="12"/>
+				<ScreenSwitch screen="search"/>
+			</IfScreen>
+			<IfScreen row="12" column="28" text="1">
+				<PutScreen row="-4" column="1" text="13"/>
+				<ScreenSwitch screen="search"/>
+			</IfScreen>
+			<IfScreen row="13" column="28" text="1">
+				<PutScreen row="-4" column="1" text="20"/>
+				<ScreenSwitch screen="search"/>
+			</IfScreen>
+			<IfScreen row="14" column="28" text="1">
+				<PutScreen row="-4" column="1" text="30"/>
+				<ScreenSwitch screen="search"/>
+			</IfScreen>
+			<IfScreen row="15" column="28" text="1">
+				<PutScreen row="-4" column="1" text="40"/>
+				<ScreenSwitch screen="search"/>
+			</IfScreen>
+			<IfScreen row="16" column="28" text="1">
+				<PutScreen row="-4" column="1" text="50"/>
+				<ScreenSwitch screen="search"/>
+			</IfScreen>
+		</IfAid>
+		<IfAid key="pf8">
+			<ScreenSwitch screen="SelectCo_1"/>
+		</IfAid>
+		<IfAid key="pf3">
+			<ScreenSwitch screen="search"/>
+		</IfAid>
+	</Script>
+</Screen>
+	<Screen name="SelectCo_1" clear="yes">
+		<Map framed="yes" type="normal" formatted="yes" cursorRow="9" cursorColumn="28">
+			<![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ~HCB5]     Policy]    ]    ]          ] ]     Date]      ]      Claim]        ] 
+ 2 ]VCM0500                     ]Combined Info Menu]in}Production   }            ] 
+ 3                                                                  }            ] 
+ 4 ]Company  . . . . . . . . . . .]  ]                                             
+ 5 ]Account or policy  . .}----------------------------------------------]
+ 6 ]Batch  . . . . . . . .}|]     }Select Company]                     }|]
+ 7 ]Pending cash correctio}|]}?]}Code  ]}Name       ]                  }|]
+ 8 ]Group/List . . . . . .}|]                                          }|]
+ 9                        }|]{ ] ]70]   ]The 70 Agents Company      ]  }|]
+10 ]Last or business name.}|]{ ] ]80]   ]Octo Deci and Sons         ]  }|]
+11 ~First name . . . . . .}|]{ ] ]81]   ]Nine Times Nine Insurance  ]  }|]
+12 ]Zip code . . . . . . .}|]{ ] ]90]   ]Our Highest Below          ]  }|]
+13                        }|]{ ] ]91]   ]Our Highest Company        ]  }|]
+14 ]Select one of the foll}|]                                          }|]
+15 {          ]1. Account }|]                                          }|}
+16            ]2. Account }|]                                          }|]
+17            ]3. Alternat}|]                                          }|]
+18                        }|]                                          }|]
+19                        }|]                             }      Bottom}|]
+20                        }|]]F3=Exit]]F7=Previous]                    }|]
+21                        }|]                                        } }|]
+22 }                      }|]                                          }|]
+23 ]Command===> ]XX       }----------------------------------------------]
+24 ]F1=Help  F3=Exit
+]]>
+		</Map>
+		<Script event="oninput">
+			<IfAid key="Enter">
+				<IfScreen row="9" column="28" text="1">
+					<PutScreen row="-4" column="1" text="70"/>
+					<ScreenSwitch screen="search"/>
+				</IfScreen>
+				<IfScreen row="10" column="28" text="1">
+					<PutScreen row="-4" column="1" text="80"/>
+					<ScreenSwitch screen="search"/>
+				</IfScreen>
+				<IfScreen row="11" column="28" text="1">
+					<PutScreen row="-4" column="1" text="81"/>
+					<ScreenSwitch screen="search"/>
+				</IfScreen>
+				<IfScreen row="12" column="28" text="1">
+					<PutScreen row="-4" column="1" text="90"/>
+					<ScreenSwitch screen="search"/>
+				</IfScreen>
+				<IfScreen row="13" column="28" text="1">
+					<PutScreen row="-4" column="1" text="91"/>
+					<ScreenSwitch screen="search"/>
+				</IfScreen>
+			</IfAid>
+			<IfAid key="pf7">
+				<ScreenSwitch screen="SelectCo"/>
+			</IfAid>
+			<IfAid key="pf3">
+				<ScreenSwitch screen="search"/>
+			</IfAid>
+		</Script>
+	</Screen>
+	<Screen name="billInfo" clear="yes">
+	<Map framed="yes" type="normal" formatted="yes"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ]Account:[12345678            ]}Billing Information]                    ]XYL1001
+ 2 ]Company:[50    ]                }Account}Summary                               
+ 3                                                                                 
+ 4 ]Plan:}B2}QUARTERLY PAY PLAN         ]Status:}ACCOUNT PAID TO DATE          ]   
+ 5 ]Name:}JONATHAN & SUE SMITH          ]]Agent:}BRING TO SELL AGENCY          ]   
+ 6       }DB BURWELL BOAT ZINCS         ]}UP3214}                              ]   
+ 7       }P.O. BOX 987                  ]       }P O BOX 12                    ]   
+ 8       }                              ]       }                              ]   
+ 9       }SOUTHEND-ON-SEA     }SS]              }THORPE BAY          }TB]          
+10       }              ]     }SS3 9QL      ]   }020 711 2121  ]     }SS3 7HN      
+11 ]===============================================================================
+12    ]Inception:     }25/10/01]       ]Payment]Method:    }CASH/CHECK          ]  
+13    ]Due Date:]     }        ]       ]Bill Day:]         }12       ]             
+14    ]Next]Bill:   ] }12/12/09]       ]Suspend]Billing:   }NO                  ]  
+15    ]Next]Action:   }12/12/09]       ]Next]Action]Reason:}BILL                ]  
+16    ]Last]Payment:  }15/07/09]       ]Unpaid]NSF:        }NO                  ]  
+17    ]Last]Activity:]}11/11/09]       ]Cancel]Outstanding:}NO                  ]  
+18    ]Account]Payer: }INSURED  ]      ]Remarks Present:   }NO ]                   
+19    ]Insured Min Due:}        0.00 ] ]Est]Next]Bill:     }     3425.00 ]         
+20    ]Insured Balance:}     7857.00 ] ]Service]Charge:    }        0.00 ]         
+21    ]Total]Min]Due:  }        0.00 ] ]Pending]Cash:      }        0.00 ]         
+22    ]Total]Balance:  }     7857.00 ] ]Cash]Entered]Today:}        0.00 }         
+23 }                                                                              ]
+24 }F1=Help }F3=Exit }F10=Policy}List }F11=Account}Transactions }F12=Invoices       
+]]></Map>
+	<Script event="oninput">
+		<IfAid key="pf1">
+			<ScreenSwitch screen="invoiceHelp"/>
+		</IfAid>
+		<IfAid key="pf3">
+			<ScreenSwitch screen="search"/>
+		</IfAid>
+		<IfAid key="pf10">
+			<ScreenSwitch screen="policyList"/>
+		</IfAid>
+		<IfAid key="pf11">
+			<ScreenSwitch screen="tranList1"/>
+		</IfAid>
+		<IfAid key="pf12">
+			<ScreenSwitch screen="invoice1"/>
+		</IfAid>
+		<IfAid key="clear">
+			<ScreenSwitch screen="clearScreen"/>
+		</IfAid>
+		<PutScreen row="23" column="2" text="Only F1, F3, F10, F11 and F12 allowed...                    "/>
+	</Script>
+</Screen>
+	<Screen name="billInfoAlt" clear="yes">
+	<Map framed="yes" type="normal" formatted="yes"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ]Account:[12345678            ]  }Billing Information]                  ]XYL1002
+ 2 ]Company:[50    ]                  }Account}Summary                               
+ 3                                                                                 
+ 4 ]Plan:}B2}QUARTERLY PAY PLAN         ]Status:}ACCOUNT PAID TO DATE          ]   
+ 5 ]Name:}JONATHAN & SUE SMITH          ]]Agent:}BRING TO SELL AGENCY          ]   
+ 6       }DB BURWELL BOAT ZINCS         ]}UP3214}                              ]   
+ 7       }P.O. BOX 987                  ]       }P O BOX 12                    ]   
+ 8       }                              ]       }                              ]   
+ 9       }SOUTHEND-ON-SEA     }SS]              }THORPE BAY          }TB]          
+10       }              ]     }SS3 9QL      ]   }020 711 2121  ]     }SS3 7HN      
+11 ]===============================================================================
+12    ]Inception:     }25/10/01]       ]Payment]Method:    }CASH/CHECK          ]  
+13    ]Due Date:]     }        ]       ]Bill Day:]         }12       ]             
+14    ]Next]Bill:   ] }12/12/09]       ]Suspend]Billing:   }NO                  ]  
+15    ]Next]Action:   }12/12/09]       ]Next]Action]Reason:}BILL                ]  
+16    ]Last]Payment:  }15/07/09]       ]Unpaid]NSF:        }NO                  ]  
+17    ]Last]Activity:]}11/11/09]       ]Cancel]Outstanding:}NO                  ]  
+18    ]Account]Payer: }INSURED  ]      ]Remarks Present:   }NO ]                   
+19    ]Insured Min Due:}        0.00 ] ]Est]Next]Bill:     }     3425.00 ]         
+20    ]Insured Balance:}     7857.00 ] ]Service]Charge:    }        0.00 ]         
+21    ]Total]Min]Due:  }        0.00 ] ]Pending]Cash:      }        0.00 ]         
+22    ]Total]Balance:  }     7857.00 ] ]Cash]Entered]Today:}        0.00 }         
+23 }                                                                              ]
+24 }F1=Help }F3=Exit }F10=Policy}List }F11=Account}Transactions }F12=Invoices       
+]]></Map>
+	<Script event="oninput">
+		<IfAid key="pf1">
+			<ScreenSwitch screen="invoiceHelp"/>
+		</IfAid>
+		<IfAid key="pf3">
+			<ScreenSwitch screen="search"/>
+		</IfAid>
+		<IfAid key="pf10">
+			<ScreenSwitch screen="policyList"/>
+		</IfAid>
+		<IfAid key="pf11">
+			<ScreenSwitch screen="tranList1"/>
+		</IfAid>
+		<IfAid key="pf12">
+			<ScreenSwitch screen="invoice1"/>
+		</IfAid>
+		<IfAid key="clear">
+			<ScreenSwitch screen="clearScreen"/>
+		</IfAid>
+		<PutScreen row="23" column="2" text="Only F1, F3, F10, F11 and F12 allowed...                    "/>
+	</Script>
+</Screen>
+<Screen name="acctEntry" clear="yes">
+	<Map framed="yes" type="normal" formatted="yes"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ]Account:]12345678            ]}Billing Information]                    ]XYL1002
+ 2 ]Company:]50    ]                }Account}Update                                
+ 3                                                                                 
+ 4 ]Plan:{B2}QUARTERLY PAY PLAN         ]Status:}ACCOUNT PAID TO DATE          ]   
+ 5 ]Name:{JONATHAN & SUE SMITH          ]]Agent:{BRING TO SELL AGENCY          ]   
+ 6       {DB BURWELL BOAT ZINCS         ]{UP3214{                              ]   
+ 7       {P.O. BOX 987                  ]       {P O BOX 12                    ]   
+ 8       {                              ]       {                              ]   
+ 9       {SOUTHEND-ON-SEA     {SS]              {THORPE BAY          {TB]          
+10       {              ]     {SS3 9QL      ]   {020 711 2121  ]     {SS3 7HN      
+11 ]===============================================================================
+12                                     ]Payment]Method:    {CASH/CHECK          ]  
+13    ]Due Date:]     }        ]       ]Bill Day:]         {12       ]             
+14    ]Next]Bill:   ] {12/12/08]       ]Suspend]Billing:   {NO                  ]  
+15    ]Account]Payer: {INSURED  ]
+16
+17
+18
+19
+20
+21
+22
+23 }                                                                              ]
+24 }F1=Help }Enter=Submit }F3=Cancel
+]]></Map>
+<Map name="confirmed" framed="yes" type="normal" formatted="yes"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ]Account:[12345678            ]}Billing Information]                    ]XYL1002
+ 2 ]Company:[50    ]                }Account}Update                                
+ 3                                                                                 
+ 4 
+ 5 
+ 6 
+ 7 
+ 8 
+ 9 
+10        }CHANGES HAVE BEEN POSTED FOR BATCH UPDATE--DISPLAYING SUMMARY
+11 
+12 
+13 
+14 
+15 
+16
+17
+18
+19
+20
+21
+22
+23 }                                                                              ]
+24 }
+]]></Map>
+	<Script event="onLoad">
+		<LoadMap name="default"/>
+		<ScreenCopy fromRow="-14" fromColumn="21" toRow="14" toColumn="21" length="8"/>
+		<ScreenCopy fromRow="-14" fromColumn="58" toRow="14" toColumn="58" length="3"/>
+		<SendScreen clear="yes" unlock="yes"/>
+		<ReceiveInput/>
+	</Script>
+	<Script event="oninput">
+		<IfAid key="pf1">
+			<ScreenSwitch screen="invoiceHelp"/>
+		</IfAid>
+		<IfAid key="pf3">
+			<ScreenSwitch screen="billInfo"/>
+		</IfAid>
+		<IfAid key="pf4">
+			<ScreenCopy fromRow="14" fromColumn="21" toRow="-14" toColumn="21" length="8"/>
+			<ScreenCopy fromRow="14" fromColumn="58" toRow="-14" toColumn="58" length="3"/>
+			<IfCursorAt row="14" column="21">
+				<ScreenSwitch screen="NextBillDate"/>
+			</IfCursorAt>
+			<IfCursorAt row="14" column="58">
+				<ScreenSwitch screen="SuspendBilling"/>
+			</IfCursorAt>
+		</IfAid>
+		<IfAid key="enter">
+			<IfScreen row="4" column="8" text="B">
+				<IfScreen row="10" column="29" text="S">
+					<LoadMap name="confirmed"/>
+					<SendScreen clear="yes" unlock="yes"/>
+					<Sleep milliSeconds="2000"/>
+					<ScreenSwitch screen="billInfo"/>
+					<SetCursor row="4" column="8"/>
+				<Else/>
+					<PutScreen row="18" column="20" text="}Postal Code must start with an S                "/>
+					<SetCursor row="10" column="29"/>
+				</IfScreen>
+			<Else/>
+				<PutScreen row="18" column="20" text="}Pay Plan must start with a B                    "/>
+			</IfScreen>
+		<Else/>
+			<PutScreen row="18" column="20" text="Only F1, F3 and ENTER allowed...                    "/>
+		</IfAid>
+		<IfAid key="clear">
+			<ScreenSwitch screen="clearScreen"/>
+		</IfAid>
+	</Script>
+</Screen>
+<Screen name="acctEntry2" clear="yes">
+	<Map framed="yes" type="normal" formatted="yes"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ]Account:]12345678            ]}Billing Information]                    ]XYL1002
+ 2 ]Company:]50    ]                }Account}Update                                
+ 3                                                                                 
+ 4  ]Plan:{B2}QUARTERLY PAY PLAN         ]Status:}ACCOUNT PAID TO DATE          ]   
+ 5  ]Name:{JONATHAN & SUE SMITH          ]]Agent:{BRING TO SELL AGENCY          ]   
+ 6        {DB BURWELL BOAT ZINCS         ]{UP3214{                              ]   
+ 7        {P.O. BOX 987                  ]       {P O BOX 12                    ]   
+ 8        {                              ]       {                              ]   
+ 9        {SOUTHEND-ON-SEA     {SS]              {THORPE BAY          {TB]          
+10        {              ]     {SS3 9QL      ]   {020 711 2121  ]     {SS3 7HN      
+11 ]===============================================================================
+12                                    ]Payment]Method:    {CASH/CHECK          ]  
+13   ]Due Date:]     }        ]       ]Bill Day:]         {12       ]             
+14   ]Next]Bill:   ] {12/12/08]       ]Suspend]Billing:   {NO                  ]  
+15   ]Account]Payer: {INSURED  ]
+16
+17
+18
+19
+20
+21
+22
+23 }                                                                              ]
+24 }F1=Help }Enter=Submit }F3=Cancel
+]]></Map>
+<Map name="confirmed" framed="yes" type="normal" formatted="yes"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ]Account:[12345678            ]}Billing Information]                    ]XYL1002
+ 2 ]Company:[50    ]                }Account}Update                                
+ 3                                                                                 
+ 4 
+ 5 
+ 6 
+ 7 
+ 8 
+ 9 
+10        }CHANGES HAVE BEEN POSTED FOR BATCH UPDATE--DISPLAYING SUMMARY
+11 
+12 
+13 
+14 
+15 
+16
+17
+18
+19
+20
+21
+22
+23 }                                                                              ]
+24 }
+]]></Map>
+	<Script event="oninput">
+		<IfAid key="pf1">
+			<ScreenSwitch screen="invoiceHelp"/>
+		</IfAid>
+		<IfAid key="pf3">
+			<ScreenSwitch screen="billInfo"/>
+		</IfAid>
+		<IfAid key="enter">
+			<IfScreen row="4" column="8" text="B">
+				<IfScreen row="10" column="29" text="S">
+					<LoadMap name="confirmed"/>
+					<SendScreen clear="yes" unlock="yes"/>
+					<Sleep milliSeconds="2000"/>
+					<ScreenSwitch screen="billInfo"/>
+					<SetCursor row="4" column="8"/>
+				<Else/>
+					<PutScreen row="18" column="20" text="}Postal Code must start with an S                "/>
+					<SetCursor row="10" column="29"/>
+				</IfScreen>
+			<Else/>
+				<PutScreen row="18" column="20" text="}Pay Plan must start with a B                    "/>
+			</IfScreen>
+		<Else/>
+			<PutScreen row="18" column="20" text="Only F1, F3 and ENTER allowed...                    "/>
+		</IfAid>
+		<IfAid key="clear">
+			<ScreenSwitch screen="clearScreen"/>
+		</IfAid>
+	</Script>
+</Screen>
+<Screen name="NextBillDate" clear="yes">
+	<Map name="default" framed="yes" type="normal" formatted="yes" cursorRow="7" cursorColumn="36"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ]                          ]}Next Billing Date]                         ]XYL1008
+ 2 ]                             }Account}Update                                
+ 3                                                                                 
+ 4 
+ 5 
+ 6 
+ 7 ]        ]Enter Next Bill Date:   {        ]
+ 8 
+ 9          ]Billing Date format is MM/DD/YY where:
+10              ]MM = 2 digit month (01..12)
+11              ]DD = 2 digit day   (01..31)
+12              ]YY = 2 digit year  (00..99)
+13 
+14 
+15 
+16 
+17 
+18 
+19 
+20 
+21 
+22 
+23 }                                                                              ]
+24 }     }Enter=Submit }F3=Exit  }F6=Return
+]]></Map>
+	<Script event="onload">
+		<LoadMap name="default"/>
+		<ScreenCopy fromRow="-14" fromColumn="21" toRow="7" toColumn="36" length="8"/>
+		<SendScreen clear="yes" unlock="yes"/>
+		<ReceiveInput/>
+	</Script>
+	<Script event="oninput">
+		<IfAid key="pf3">
+			<ScreenSwitch screen="search"/>
+		</IfAid>
+		<IfAid key="pf6">
+			<ScreenSwitch screen="acctentry"/>
+		</IfAid>
+		<IfAid key="enter">
+			<ScreenCopy toRow="-14" toColumn="21" fromRow="7" fromColumn="36" length="8"/>
+			<ScreenSwitch screen="acctentry"/>
+		</IfAid>
+	</Script>
+</Screen>
+	<Screen name="SuspendBilling" clear="yes">
+ 	  <Map name="default" framed="yes" type="normal" formatted="yes" cursorRow="7" cursorColumn="36"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ]                                  ]}Billing Day]                       ]XYL1009
+ 2 ]                                 }Account}Update                                
+ 3                                                                                 
+ 4 
+ 5 
+ 6 
+ 7          ]Suspend Billing: {   ]
+ 8 
+ 9          ]Valid entries are YES or NO
+10  
+11 ]
+12 ]                                            
+13 ]                                               
+14 ]                                     
+15 ]                                   
+16 ]                           
+17 ]                      
+18 ]
+19 ]
+20 ]
+21 ]
+22 ]
+23 }                                                                              ]
+24 }     }Enter=Submit  }F6=Return
+]]></Map>
+		<Script event="onload">
+			<LoadMap name="default"/>
+			<ScreenCopy fromRow="-14" fromColumn="58" toRow="7" toColumn="29" length="3"/>
+			<SendScreen clear="yes" unlock="yes"/>
+			<ReceiveInput/>
+		</Script>
+		<Script event="oninput">
+			<IfAid key="pf6">
+				<ScreenSwitch screen="acctentry"/>
+			</IfAid>
+			<IfAid key="enter">
+				<ScreenCopy toRow="-14" toColumn="58" fromRow="7" fromColumn="29" length="3"/>
+				<ScreenSwitch screen="acctentry"/>
+			</IfAid>
+		</Script>
+	</Screen>
+<Screen name="invoice1" clear="yes">
+	<Map framed="yes" type="normal" formatted="yes"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 }                              }Billing Information]                    ]XYL1004
+ 2 ]                                  }Notice}View                                 
+ 3 ]ACCOUNT   : 12345678        POLICY:                                   XMAP0170 
+ 4 ]AS OF DATE: 25/02/2009                                                PAGE:   1
+ 5 ]                                                                               
+ 6 ]INVOICE   INVOICE      DUE    PAID      PAID         TOTAL                     
+ 7 ] DATE      AMOUNT      DATE   DATE     AMOUNT       BALANCE                    
+ 8 ]------- ------------- ------ ------ ------------- -------------                
+ 9 ]300706 ]     1285.00 ]160806]170806]     1285.00 ]        0.00 ]               
+10 ]300906       1285.00  171006 191006      1285.00          0.00                 
+11 ]301206       1285.00  171007 170107      1285.00          0.00                 
+12 ]300307       1285.00  140407 120407      1285.00          0.00                 
+13 ]300707       1425.25  140807 190807      1425.25          0.00                 
+14 ]300907       1909.25  161007 151007      1909.25          0.00  *              
+15 ]011007          4.00  161007 151007         4.00          0.00                 
+16 ]301207       1417.25  170108 150108      1417.25          0.00                 
+17 ]020108          4.00  170108 150108         4.00          0.00                 
+18 ]300308       1417.25  160408 150408      1417.25          0.00                 
+19 ]010408          4.00  160408 150408         4.00          0.00                 
+20 ]300708       1780.75  140808 140808      1780.75          0.00                 
+21 ]300808         51.00  140908 120908        51.00          0.00                 
+22 ]160908       1780.75  071008 160908      1780.75          0.00  *              
+23 }                                                                     ]}MORE...]
+24 }F1=Help }F3=Exit               }F7=Backward }F8=Forward
+]]></Map>
+	<Script event="oninput">
+		<IfAid key="pf1">
+			<ScreenSwitch screen="invoiceHelp"/>
+		</IfAid>
+		<IfAid key="pf3">
+			<ScreenSwitch screen="billInfo"/>
+		</IfAid>
+		<IfAid key="pf8">
+			<ScreenSwitch screen="invoice2"/>
+		</IfAid>
+		<IfAid key="pf7">
+			<PutScreen row="23" column="2" text="First screen displayed-- F7 invalid...                    "/>
+		<Else/>
+			<PutScreen row="23" column="2" text="}Only ENTER, PF1, PF3, PF7 and PF8 are supported...                    "/>
+		</IfAid>
+		<IfAid key="clear">
+			<ScreenSwitch screen="clearScreen"/>
+		</IfAid>
+	</Script>
+</Screen>
+<Screen name="invoice2" clear="yes">
+	<Map framed="yes" type="normal" formatted="yes"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 }                              }Billing Information]                    ]XYL1004
+ 2 ]                                  }Notice}View                                 
+ 3 ]ACCOUNT   : 12345678        POLICY:                                   XMAP0170 
+ 4 ]AS OF DATE: 25/02/2004                                                PAGE:   2
+ 5 ]                                                                               
+ 6 ]INVOICE   INVOICE      DUE    PAID      PAID         TOTAL                     
+ 7 ] DATE      AMOUNT      DATE   DATE     AMOUNT       BALANCE                    
+ 8 ]------- ------------- ------ ------ ------------- -------------                
+ 9 ]181008 ]     1780.75 ]011108]021108]     1780.75 ]        0.00 ]               
+10 ]011108       1525.00  171108 191108      1525.00          0.00                 
+11 ]
+12 ]
+13 ]
+14 ]
+15 ]
+16 ]
+17 ]
+18 ]
+19 ]
+20 ]
+21 ]
+22 ]
+23 }                                                                     ]}LAST...]
+24 }F1=Help }F3=Exit               }F7=Backward }F8=Forward
+]]></Map>
+	<Script event="oninput">
+		<IfAid key="pf1">
+			<ScreenSwitch screen="invoiceHelp"/>
+		</IfAid>
+		<IfAid key="pf3">
+			<ScreenSwitch screen="billInfo"/>
+		</IfAid>
+		<IfAid key="pf8">
+			<PutScreen row="23" column="2" text="Last screen displayed-- F8 invalid...                    "/>
+		<Else/>
+			<PutScreen row="23" column="2" text="}Only ENTER, PF1, PF3, PF7 and PF8 are supported...                    "/>
+		</IfAid>
+		<IfAid key="pf7">
+			<ScreenSwitch screen="invoice1"/>
+		</IfAid>
+		<IfAid key="clear">
+			<ScreenSwitch screen="clearScreen"/>
+		</IfAid>
+	</Script>
+</Screen>
+<Screen name="invoiceHelp" clear="yes">
+	<Map type="normal" formatted="yes"><![CDATA[
+} Invoice List Help]
+
+
+
+
+ Invoices are displayed in date order starting with the oldest invoice first.
+
+ If there is more than one page of invoices, the MORE... will display on the 
+ bottom line and F8 can be used, otherwise the word LAST...will display.
+
+ If the PAGE field at the top is 1, then the F7 key will display an error as
+ there are no prior invoices to display.
+
+ When paid amount is less than the invoice amount, the Total Balance column
+ will grow.  Received checks are applied against outstanding invoices--to 
+ see received checks, use the CLEAR to return to the home screen and select
+ the Transactions.
+
+ Press Enter to return to the active Invoice screen...
+]]></Map>
+	<Script event="onload">
+		<SaveScreen name="invoicesave"/>
+		<LoadMap name="default"/>
+		<SendScreen clear="yes" unlock="yes"/>
+		<ReceiveInput/>
+	</Script>
+	<Script event="oninput">
+		<RestoreScreen name="invoicesave"/>
+	</Script>
+</Screen>
+<Screen name="policyList" clear="yes">
+	<Map framed="yes" type="normal" formatted="yes"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ]Account:[12345678            ]}Account Information]                    ]XYL1002
+ 2 ]Company:[50    ]                  }Policy}List                                 
+ 3                                                                                 
+ 4 ]Plan:}B2}QUARTERLY PAY PLAN         ]Status:}ACCOUNT PAID TO DATE          ]   
+ 5 ]Name:}JONATHAN & SUE SMITH          ]]Agent:}BRING TO SELL AGENCY          ]   
+ 6       }DB BURWELL BOAT ZINCS         ]}UP3214}                              ]   
+ 7       }P.O. BOX 987                  ]       }P O BOX 12                    ]   
+ 8       }                              ]       }                              ]   
+ 9       }SOUTHEND-ON-SEA     }SS]              }THORPE BAY          }TB]          
+10       }              ]     }SS3 9QL      ]   }020 711 2121  ]     }SS3 7HN      
+11 ]                                                                               
+12 1=Select             ]Effect Expire Equity]  ]Written]   ]Unpaid]  ]Minimum]   ]
+13  ]Policy]Number]]LOB]] Date   Date   Date ]  ]Premium]  ]Balance]      ]Due]Rem[
+14  }ACCOUNT       }    }                    }  13560.00]   6237.00]      0.00]   [
+15  }DMV800232-50  }MULT}231007 231008 231008}   4029.00]      0.00]      0.00]   [
+16  }DMV800232-50  }MULT}231008 231009 200109}   4857.00    3676.34       0.00    [
+17  }DMV800232-52  }MULT}231007 231008 231008}   1291.00       0.00       0.00    [
+18  }DMV800232-52  }MULT}231008 231009 200109}   3383.00    2560.66       0.00    ]
+19  }              }    }                    }                                    ]
+20  }              }    }                    }                                    ]
+21  }              }    }                    }                                    ]
+22  }              }    }                    }                                    ]
+23 }                                                                     ]}       ]
+24 }F1=Help }F3=Exit }         }F7=Bwd }F8=Fwd }F9=Account}Summary }F12=Invoices    
+]]></Map>
+	<Script event="oninput">
+		<IfAid key="enter">
+			<IfScreen row="14" column="1" text="1">
+				<ScreenSwitch screen="policyDet1"/>
+			</IfScreen>
+			<IfScreen row="15" column="1" text="1">
+				<ScreenSwitch screen="policyDet2"/>
+			</IfScreen>
+			<IfScreen row="16" column="1" text="1">
+				<ScreenSwitch screen="policyDet3"/>
+			</IfScreen>
+			<IfScreen row="17" column="1" text="1">
+				<ScreenSwitch screen="policyDet4"/>
+			</IfScreen>
+			<IfScreen row="18" column="1" text="1">
+				<ScreenSwitch screen="policyDet5"/>
+			</IfScreen>
+		</IfAid>
+		<IfAid key="pf1">
+			<ScreenSwitch screen="invoiceHelp"/>
+		</IfAid>
+		<IfAid key="pf3">
+			<ScreenSwitch screen="search"/>
+		</IfAid>
+		<IfAid key="pf7">
+			<PutScreen row="23" column="2" text="AT TOP OF LIST   "/>
+		</IfAid>
+		<IfAid key="pf8">
+			<PutScreen row="23" column="2" text="AT BOTTOM OF LIST"/>
+		</IfAid>
+		<IfAid key="pf9">
+			<ScreenSwitch screen="billInfo"/>
+		</IfAid>
+		<IfAid key="pf11">
+			<ScreenSwitch screen="tranList1"/>
+		</IfAid>
+		<IfAid key="pf12">
+			<ScreenSwitch screen="invoice1"/>
+		</IfAid>
+		<IfAid key="clear">
+			<ScreenSwitch screen="clearScreen"/>
+		</IfAid>
+	</Script>
+</Screen>
+
+	
+<Screen name="policyDet1" clear="yes">
+	<Map framed="yes" type="normal" formatted="yes"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ]Account:[12345678            ]}Account Information]                    ]XYL1006
+ 2 ]Company:[50    ]                  }Policy}Detail                                 
+ 3                                                                                 
+ 4 ]Plan:}B2}QUARTERLY PAY PLAN         ]Status:}ACCOUNT PAID TO DATE          ]   
+ 5 ]Name:}JONATHAN & SUE SMITH          ]]Agent:}BRING TO SELL AGENCY          ]   
+ 6       }DB BURWELL BOAT ZINCS         ]}UP3214}                              ]   
+ 7       }P.O. BOX 987                  ]       }P O BOX 12                    ]   
+ 8       }                              ]       }                              ]   
+ 9       }SOUTHEND-ON-SEA     }SS]              }THORPE BAY          }TB]          
+10       }              ]     }SS3 9QL      ]   }020 711 2121  ]     }SS3 7HN      
+11 ]                                                                               
+12    ]Policy Number:}ACCOUNT       ]LOB:{    }
+13    ]  Effect Date:{231008] Expire Date:{231009] Equity Date:{200107] 
+14
+15         Written Premium:{  13560.00] 
+16          Unpaid Balance:{   6237.00]
+17             Minimum Due:{      0.00]
+18
+19
+20
+21
+22
+23 }                                                                     ]}       ]
+24 }        }F3=Exit }F10=Policy}List          }F9=Account}Summary }F12=Invoices    
+]]></Map>
+	<Script event="oninput">
+		<IfAid key="enter">
+			<ScreenSwitch screen="policyList"/>
+		</IfAid>
+		<IfAid key="pf1">
+			<ScreenSwitch screen="invoiceHelp"/>
+		</IfAid>
+		<IfAid key="pf3">
+			<ScreenSwitch screen="search"/>
+		</IfAid>
+		<IfAid key="pf9">
+			<ScreenSwitch screen="billInfo"/>
+		</IfAid>
+		<IfAid key="pf10">
+			<ScreenSwitch screen="policyList"/>
+		</IfAid>
+		<IfAid key="pf12">
+			<ScreenSwitch screen="invoice1"/>
+		</IfAid>
+		<IfAid key="clear">
+			<ScreenSwitch screen="clearScreen"/>
+		</IfAid>
+	</Script>
+</Screen>
+<Screen name="policyDet2" clear="yes">
+	<Map framed="yes" type="normal" formatted="yes">
+	<![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ]Account:[12345678            ]}Account Information]                    ]XYL1006
+ 2 ]Company:[50    ]                  }Policy}Detail                                 
+ 3                                                                                 
+ 4 ]Plan:}B2}QUARTERLY PAY PLAN         ]Status:}ACCOUNT PAID TO DATE          ]   
+ 5 ]Name:}JONATHAN & SUE SMITH          ]]Agent:}BRING TO SELL AGENCY          ]   
+ 6       }DB BURWELL BOAT ZINCS         ]}UP3214}                              ]   
+ 7       }P.O. BOX 987                  ]       }P O BOX 12                    ]   
+ 8       }                              ]       }                              ]   
+ 9       }SOUTHEND-ON-SEA     }SS]              }THORPE BAY          }TB]          
+10       }              ]     }SS3 9QL      ]   }020 711 2121  ]     }SS3 7HN      
+11 ]                                                                               
+12    ]Policy Number:}DMV800232-50  ]LOB:{MULT}
+13    ]  Effect Date:{231008] Expire Date:{231009] Equity Date:{231008] 
+14
+15         Written Premium:{   4029.00] 
+16          Unpaid Balance:{      0.00]
+17             Minimum Due:{      0.00]
+18
+19
+20
+21
+22
+23 }                                                                     ]}       ]
+24 }        }F3=Exit }F10=Policy}List          }F9=Account}Summary }F12=Invoices    
+]]>
+	</Map>
+	<Script event="oninput">
+		<IfAid key="enter">
+			<ScreenSwitch screen="policyList"/>
+		</IfAid>
+		<IfAid key="pf1">
+			<ScreenSwitch screen="invoiceHelp"/>
+		</IfAid>
+		<IfAid key="pf3">
+			<ScreenSwitch screen="search"/>
+		</IfAid>
+		<IfAid key="pf9">
+			<ScreenSwitch screen="billInfo"/>
+		</IfAid>
+		<IfAid key="pf10">
+			<ScreenSwitch screen="policyList"/>
+		</IfAid>
+		<IfAid key="pf12">
+			<ScreenSwitch screen="invoice1"/>
+		</IfAid>
+		<IfAid key="clear">
+			<ScreenSwitch screen="clearScreen"/>
+		</IfAid>
+	</Script>
+</Screen>
+<Screen name="policyDet3" clear="yes">
+	<Map framed="yes" type="normal" formatted="yes">
+	<![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ]Account:[12345678            ]}Account Information]                    ]XYL1006
+ 2 ]Company:[50    ]                  }Policy}Detail                                 
+ 3                                                                                 
+ 4 ]Plan:}B2}QUARTERLY PAY PLAN         ]Status:}ACCOUNT PAID TO DATE          ]   
+ 5 ]Name:}JONATHAN & SUE SMITH          ]]Agent:}BRING TO SELL AGENCY          ]   
+ 6       }DB BURWELL BOAT ZINCS         ]}UP3214}                              ]   
+ 7       }P.O. BOX 987                  ]       }P O BOX 12                    ]   
+ 8       }                              ]       }                              ]   
+ 9       }SOUTHEND-ON-SEA     }SS]              }THORPE BAY          }TB]          
+10       }              ]     }SS3 9QL      ]   }020 711 2121  ]     }SS3 7HN      
+11 ]                                                                               
+12    ]Policy Number:}DMV800232-50  ]LOB:{MULT}
+13    ]  Effect Date:{231008] Expire Date:{231009] Equity Date:{200109] 
+14
+15         Written Premium:{   4857.00] 
+16          Unpaid Balance:{   3676.34]
+17             Minimum Due:{      0.00]
+18
+19
+20
+21
+22
+23 }                                                                     ]}       ]
+24 }        }F3=Exit }F10=Policy}List          }F9=Account}Summary }F12=Invoices    
+]]>
+	</Map>
+	<Script event="oninput">
+		<IfAid key="enter">
+			<ScreenSwitch screen="policyList"/>
+		</IfAid>
+		<IfAid key="pf1">
+			<ScreenSwitch screen="invoiceHelp"/>
+		</IfAid>
+		<IfAid key="pf3">
+			<ScreenSwitch screen="search"/>
+		</IfAid>
+		<IfAid key="pf9">
+			<ScreenSwitch screen="billInfo"/>
+		</IfAid>
+		<IfAid key="pf10">
+			<ScreenSwitch screen="policyList"/>
+		</IfAid>
+		<IfAid key="pf12">
+			<ScreenSwitch screen="invoice1"/>
+		</IfAid>
+		<IfAid key="clear">
+			<ScreenSwitch screen="clearScreen"/>
+		</IfAid>
+	</Script>
+</Screen>
+<Screen name="policyDet4" clear="yes">
+	<Map framed="yes" type="normal" formatted="yes">
+	<![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ]Account:[12345678            ]}Account Information]                    ]XYL1006
+ 2 ]Company:[50    ]                  }Policy}Detail                                 
+ 3                                                                                 
+ 4 ]Plan:}B2}QUARTERLY PAY PLAN         ]Status:}ACCOUNT PAID TO DATE          ]   
+ 5 ]Name:}JONATHAN & SUE SMITH          ]]Agent:}BRING TO SELL AGENCY          ]   
+ 6       }DB BURWELL BOAT ZINCS         ]}UP3214}                              ]   
+ 7       }P.O. BOX 987                  ]       }P O BOX 12                    ]   
+ 8       }                              ]       }                              ]   
+ 9       }SOUTHEND-ON-SEA     }SS]              }THORPE BAY          }TB]          
+10       }              ]     }SS3 9QL      ]   }020 711 2121  ]     }SS3 7HN      
+11 ]                                                                               
+12    ]Policy Number:}DMV800232-52  ]LOB:{MULT}
+13    ]  Effect Date:{231008] Expire Date:{231009] Equity Date:{231009] 
+14
+15         Written Premium:{   1291.00] 
+16          Unpaid Balance:{      0.00]
+17             Minimum Due:{      0.00]
+18
+19
+20
+21
+22
+23 }                                                                     ]}       ]
+24 }        }F3=Exit }F10=Policy}List          }F9=Account}Summary }F12=Invoices    
+]]>
+	</Map>
+	<Script event="oninput">
+		<IfAid key="enter">
+			<ScreenSwitch screen="policyList"/>
+		</IfAid>
+		<IfAid key="pf1">
+			<ScreenSwitch screen="invoiceHelp"/>
+		</IfAid>
+		<IfAid key="pf3">
+			<ScreenSwitch screen="search"/>
+		</IfAid>
+		<IfAid key="pf9">
+			<ScreenSwitch screen="billInfo"/>
+		</IfAid>
+		<IfAid key="pf10">
+			<ScreenSwitch screen="policyList"/>
+		</IfAid>
+		<IfAid key="pf12">
+			<ScreenSwitch screen="invoice1"/>
+		</IfAid>
+		<IfAid key="clear">
+			<ScreenSwitch screen="clearScreen"/>
+		</IfAid>
+	</Script>
+</Screen>
+<Screen name="policyDet5" clear="yes">
+	<Map framed="yes" type="normal" formatted="yes">
+	<![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ]Account:[12345678            ]}Account Information]                    ]XYL1006
+ 2 ]Company:[50    ]                  }Policy}Detail                                 
+ 3                                                                                 
+ 4 ]Plan:}B2}QUARTERLY PAY PLAN         ]Status:}ACCOUNT PAID TO DATE          ]   
+ 5 ]Name:}JONATHAN & SUE SMITH          ]]Agent:}BRING TO SELL AGENCY          ]   
+ 6       }DB BURWELL BOAT ZINCS         ]}UP3214}                              ]   
+ 7       }P.O. BOX 987                  ]       }P O BOX 12                    ]   
+ 8       }                              ]       }                              ]   
+ 9       }SOUTHEND-ON-SEA     }SS]              }THORPE BAY          }TB]          
+10       }              ]     }SS3 9QL      ]   }020 711 2121  ]     }SS3 7HN      
+11 ]                                                                               
+12    ]Policy Number:}DMV800232-52  ]LOB:{MULT}
+13    ]  Effect Date:{231008] Expire Date:{231009] Equity Date:{200109] 
+14
+15         Written Premium:{   3383.00] 
+16          Unpaid Balance:{   2560.66]
+17             Minimum Due:{      0.00]
+18
+19
+20
+21
+22
+23 }                                                                     ]}       ]
+24 }        }F3=Exit }F10=Policy}List          }F9=Account}Summary }F12=Invoices    
+]]>
+	</Map>
+	<Script event="oninput">
+		<IfAid key="enter">
+			<ScreenSwitch screen="policyList"/>
+		</IfAid>
+		<IfAid key="pf1">
+			<ScreenSwitch screen="invoiceHelp"/>
+		</IfAid>
+		<IfAid key="pf3">
+			<ScreenSwitch screen="search"/>
+		</IfAid>
+		<IfAid key="pf9">
+			<ScreenSwitch screen="billInfo"/>
+		</IfAid>
+		<IfAid key="pf10">
+			<ScreenSwitch screen="policyList"/>
+		</IfAid>
+		<IfAid key="pf12">
+			<ScreenSwitch screen="invoice1"/>
+		</IfAid>
+		<IfAid key="clear">
+			<ScreenSwitch screen="clearScreen"/>
+		</IfAid>
+	</Script>
+</Screen>
+<Screen name="tranList1" clear="yes">
+	<Map framed="yes" type="normal" formatted="yes"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ]Account:[12345678            ]}Account Information]                    ]XYL1003
+ 2 ]Company:[50    ]            }Account}Transaction}List                          
+ 3 ]Policy:]}DMV800232           ]                                                 
+ 4 ]Plan:   }B2}QUARTERLY PAY PLAN         ]Status:}ACCOUNT PAID TO DATE          ]   
+ 5 ]Name:   }JONATHAN & SUE SMITH          ]]Agent:}BRING TO SELL AGENCY          ]   
+ 6          }DB BURWELL BOAT ZINCS         ]}UP3214}                              ]   
+ 7                                                                                 
+ 8 ]*]]Date]    ]Action]    ]Eff\Due]  ]Amount]   ]Min]Due] Description      ]LOB] 
+ 9 [ }999999]SETUP TRIGGER   ]  0.00]  ]   0.00 ] ]       ]            ]     ]    ]
+10 ] }111108]BILL DAY CHNG-30]      ]  ]   0.00 ] ]   0.00]            ]     ]    ]
+11 ] }301008]PEND PREM APPLY  141108     822.34-      0.00 DMV800232-52       MULT]
+12 ] }301008]SYS GEN ADJUSTMT 231007    2003.00       0.00 DMV800232-52       MULT]
+13 ] }301008]PEND PREM APPLY  141108    1180.66-      0.00 DMV800232-50       MULT]
+14 ] }301008]FINAL AUDIT      231007    2003.00-      0.00 DMV800232-52       MULT]
+15 ] }091008]RENEWAL PREMIUM  231008    3383.00       0.00 DMV800232-52       MULT]
+16 ] }091008]RENEWAL PREMIUM  231008    4857.00       0.00 DMV800232-50       MULT]
+17 ] }150708]CASH (0)-APL     160708       8.00-      0.00                        ]
+18 ] }150708]CASH (0)-APL     160708     823.50-      0.00 DMV800232-52       MULT]
+19 ] }150708]CASH (0)-APL     160708    1007.25-      0.00 DMV800232-50       MULT]
+20 ] }150708]CASH (0)-RCV     150708    1838.75-      0.00                        ]
+21 [ }010708]INSTALL NOTICE   160708    1838.75    1838.75                        ]
+22 ] }010708]SERVICE CHARGE                8.00       0.00                        ]
+23 }                                                                     ]}MORE...]
+24 }F1=Help }F3=Exit }F7=Bwd }F8=Fwd }F9=Acct}Summary }F10=PolicyList }F12=Invoices
+]]></Map>
+	<Script event="oninput">
+		<IfAid key="pf1">
+			<ScreenSwitch screen="invoiceHelp"/>
+		</IfAid>
+		<IfAid key="pf3">
+			<ScreenSwitch screen="search"/>
+		</IfAid>
+		<IfAid key="pf7">
+			<PutScreen row="23" column="2" text="AT TOP OF LIST   "/>
+		</IfAid>
+		<IfAid key="pf8">
+			<ScreenSwitch screen="tranList2"/>
+		</IfAid>
+		<IfAid key="pf9">
+			<ScreenSwitch screen="billInfo"/>
+		</IfAid>
+		<IfAid key="pf10">
+			<ScreenSwitch screen="policyList"/>
+		</IfAid>
+		<IfAid key="pf12">
+			<ScreenSwitch screen="invoice1"/>
+		</IfAid>
+		<IfAid key="clear">
+			<ScreenSwitch screen="clearScreen"/>
+		</IfAid>
+	</Script>
+</Screen>
+<Screen name="tranList2" clear="yes">
+	<Map framed="yes" type="normal" formatted="yes"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ]Account:[12345678            ]}Account Information]                    ]XYL1003
+ 2 ]Company:[50    ]            }Account}Transaction}List                          
+ 3 ]Policy:]}DMV800232           ]                                                 
+ 4 ]Plan:   }B2}QUARTERLY PAY PLAN         ]Status:}ACCOUNT PAID TO DATE          ]   
+ 5 ]Name:   }JONATHAN & SUE SMITH          ]]Agent:}BRING TO SELL AGENCY          ]   
+ 6          }DB BURWELL BOAT ZINCS         ]}UP3214}                              ]   
+ 7                                                                                 
+ 8 ]*]]Date]    ]Action]    ]Eff\Due]  ]Amount]   ]Min]Due] Description      ]LOB] 
+ 9 ] }090508]SYS GEN ADJUSTMT]231008]  ]5003.00 ] ]   0.00]DMV800232-52]     ]MULT]
+10 ] }090508]PEND PREM APPLY  141108     180.66-      0.00 DMV800232-50       MULT]
+11 ] }090508]FINAL AUDIT      231008    1206.00-      0.00 DMV800232-52       MULT]
+12 ] }090508]RENEWAL PREMIUM  231009    3483.00       0.00 DMV800232-52       MULT]
+13 ] }150308]RENEWAL PREMIUM  231009    3727.00       0.00 DMV800232-50       MULT]
+14 ] }150308]CASH (0)-APL     160908       8.00-      0.00                        ]
+15 ] }150308]CASH (0)-APL     160908     823.50-      0.00 DMV800232-52       MULT]
+16 ] }150308]CASH (0)-APL     160908    1007.25-      0.00 DMV800232-50       MULT]
+17 ] }150308]CASH (0)-RCV     150908     945.75-      0.00                        ]
+18 [ }010208]INSTALL NOTICE   160908     945.75     945.75                        ]
+19 ] }010208]SERVICE CHARGE                8.00       0.00                        ]
+20 ] }150108]CASH (0)-RCV     150907    2138.75-      0.00                        ]
+21 [ }150108]INSTALL NOTICE   160907    2138.75    2138.75                        ]
+22 ] }150108]SERVICE CHARGE                8.00       0.00                        ]
+23 }                                                                     ]}MORE...]
+24 }F1=Help }F3=Exit }F7=Bwd }F8=Fwd }F9=Acct}Summary }F10=PolicyList }F12=Invoices
+]]></Map>
+	<Script event="oninput">
+		<IfAid key="pf1">
+			<ScreenSwitch screen="invoiceHelp"/>
+		</IfAid>
+		<IfAid key="pf3">
+			<ScreenSwitch screen="search"/>
+		</IfAid>
+		<IfAid key="pf7">
+			<ScreenSwitch screen="tranList1"/>
+		</IfAid>
+		<IfAid key="pf8">
+			<ScreenSwitch screen="tranList3"/>
+		</IfAid>
+		<IfAid key="pf9">
+			<ScreenSwitch screen="billInfo"/>
+		</IfAid>
+		<IfAid key="pf10">
+			<ScreenSwitch screen="policyList"/>
+		</IfAid>
+		<IfAid key="pf12">
+			<ScreenSwitch screen="invoice1"/>
+		</IfAid>
+		<IfAid key="clear">
+			<ScreenSwitch screen="clearScreen"/>
+		</IfAid>
+	</Script>
+</Screen>
+
+<Screen name="tranList3" clear="yes">
+	<Map framed="yes" type="normal" formatted="yes"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ]Account:[12345678            ]}Account Information]                    ]XYL1003
+ 2 ]Company:[50    ]            }Account}Transaction}List                          
+ 3 ]Policy:]}DMV800232           ]                                                 
+ 4 ]Plan:   }B2}QUARTERLY PAY PLAN         ]Status:}ACCOUNT PAID TO DATE          ]   
+ 5 ]Name:   }JONATHAN & SUE SMITH          ]]Agent:}BRING TO SELL AGENCY          ]   
+ 6          }DB BURWELL BOAT ZINCS         ]}UP3214}                              ]   
+ 7                                                                                 
+ 8 ]*]]Date]    ]Action]    ]Eff\Due]  ]Amount]   ]Min]Due] Description      ]LOB] 
+13 ] }151107]RENEWAL PREMIUM ]231008]  ]1447.00 ] ]   0.00]DMV800232-50]     ]MULT]
+14 ] }151107]CASH (0)-APL     160108       8.00-      0.00                        ]
+15 ] }151107]CASH (0)-APL     160108     123.50-      0.00 DMV800232-52       MULT]
+16 ] }151107]CASH (0)-APL     160108    1347.25-      0.00 DMV800232-50       MULT]
+17 ] }151107]CASH (0)-RCV     150108     675.75-      0.00                        ]
+14 ]
+15 ]
+16 ]
+17 ]
+18 ]
+19 ]
+20 ]
+21 ]
+22 ]
+23 }                                                                     ]}LAST...]
+24 }F1=Help }F3=Exit }F7=Bwd }F8=Fwd }F9=Acct}Summary }F10=PolicyList }F12=Invoices
+]]></Map>
+	<Script event="oninput">
+		<IfAid key="pf1">
+			<ScreenSwitch screen="invoiceHelp"/>
+		</IfAid>
+		<IfAid key="pf3">
+			<ScreenSwitch screen="search"/>
+		</IfAid>
+		<IfAid key="pf7">
+			<ScreenSwitch screen="tranList2"/>
+		</IfAid>
+		<IfAid key="pf8">
+			<PutScreen row="23" column="2" text="AT BOTTOM OF LIST                              "/>
+		</IfAid>
+		<IfAid key="pf9">
+			<ScreenSwitch screen="billInfo"/>
+		</IfAid>
+		<IfAid key="pf10">
+			<ScreenSwitch screen="policyList"/>
+		</IfAid>
+		<IfAid key="pf12">
+			<ScreenSwitch screen="invoice1"/>
+		</IfAid>
+		<IfAid key="clear">
+			<ScreenSwitch screen="clearScreen"/>
+		</IfAid>
+	</Script>
+</Screen>
+
+<Screen name="notfound" clear="yes">
+	<Map framed="yes" type="normal" formatted="yes"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ]Account:]                    ]}Billing Information]                    ]GSM1001
+ 2 ]Company:]      ]                }Account}Search                                
+ 3                                                                                 
+ 4 ]Plan:}  }                           ]Status:}                              ]   
+ 5 ]Name:}                              ]]Agent:}                              ]   
+ 6       }                              ]}      }                              ]   
+ 7       }                              ]       }                              ]   
+ 8       }                              ]       }                              ]   
+ 9       }                    }  ]              }                    }  ]          
+10       }              ]     }             ]   }              ]     }             
+11 ]
+12  
+13  
+14  
+15  
+16                        }ACCOUNT NOT FOUND-ENTER TO RETURN                  
+17  
+18                  }HINT - ONLY Account 12345678 Company 50 Exists!
+19  
+20  
+21  
+22  
+23 }]
+24 }
+]]></Map>
+	<Script event="oninput">
+		<IfAid key="enter">
+			<ScreenSwitch screen="search"/>
+		</IfAid>
+		<PutScreen row="23" column="2" text="ONLY ENTER ALLOWED TO RETURN TO SEARCH SCREEN          "/>
+		<IfAid key="clear">
+			<ScreenSwitch screen="clearScreen"/>
+		</IfAid>
+	</Script>
+</Screen>
+<Screen name="altScreen" clear="yes">
+	<Map framed="yes" type="alternate" formatted="yes"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ]Account:[12345678            ]}Account Information]                    ]XYL1003
+ 2 ]Company:[50    ]            }Account}Transaction}List                          
+ 3 ]Policy:]}DMV800232           ]                                                 
+ 4 ]Plan:   }B2}QUARTERLY PAY PLAN         ]Status:}ACCOUNT PAID TO DATE          ]   
+ 5 ]Name:   }JONATHAN & SUE SMITH          ]]Agent:}BRING TO SELL AGENCY          ]   
+ 6          }DB BURWELL BOAT ZINCS         ]}UP3214}                              ]   
+ 7                                                                                 
+ 8 ]*]]Date]    ]Action]    ]Eff\Due]  ]Amount]   ]Min]Due] Description      ]LOB] 
+ 9 ] }151108]RENEWAL PREMIUM] 231008]  ]1447.00 ] ]   0.00]DMV800232-50]     ]MULT]
+10 ] }151108]CASH (0)-APL   ] 160108]  ]   8.00-] ]   0.00]            ]     ]    ]
+11 ] }151108]CASH (0)-APL     160108     123.50-      0.00 DMV800232-52       MULT]
+12 ] }151108]CASH (0)-APL     160108    1347.25-      0.00 DMV800232-50       MULT]
+13 ] }151108]CASH (0)-RCV     150108     675.75-      0.00                        ]
+14 ] }151108]RENEWAL PREMIUM  231008    1447.00       0.00 DMV800232-50       MULT]
+15 ] }151108]CASH (0)-APL     160108       8.00-      0.00                        ]
+16 ] }151108]CASH (0)-APL     160108     123.50-      0.00 DMV800232-52       MULT]
+17 ] }151108]CASH (0)-APL     160108    1347.25-      0.00 DMV800232-50       MULT]
+18 ] }151108]CASH (0)-RCV     150108     675.75-      0.00                        ]
+19 ] }151108]RENEWAL PREMIUM  231008    1447.00       0.00 DMV800232-50       MULT]
+20 ] }151108]CASH (0)-APL     160108       8.00-      0.00                        ]
+21 ] }151108]CASH (0)-APL     160108     123.50-      0.00 DMV800232-52       MULT]
+22 ] }151108]CASH (0)-APL     160108    1347.25-      0.00 DMV800232-50       MULT]
+23 ] }151108]CASH (0)-RCV     150108     675.75-      0.00                        ]
+24 ] }151108]RENEWAL PREMIUM  231008    1447.00       0.00 DMV800232-50       MULT]
+25 ] }151108]CASH (0)-APL     160108       8.00-      0.00                        ]
+26 ] }151108]CASH (0)-APL     160108     123.50-      0.00 DMV800232-52       MULT]
+27 ] }151108]CASH (0)-APL     160108    1347.25-      0.00 DMV800232-50       MULT]
+28 ] }151108]CASH (0)-RCV     150108     675.75-      0.00                        ]
+29 ] }151108]RENEWAL PREMIUM  231008    1447.00       0.00 DMV800232-50       MULT]
+30 ] }151108]CASH (0)-APL     160108       8.00-      0.00                        ]
+31 ] }151108]CASH (0)-APL     160108     123.50-      0.00 DMV800232-52       MULT]
+32 ] }151108]CASH (0)-APL     160108    1347.25-      0.00 DMV800232-50       MULT]
+33 ] }151108]CASH (0)-RCV     150108     675.75-      0.00                        ]
+34 ] }151108]RENEWAL PREMIUM  231008    1447.00       0.00 DMV800232-50       MULT]
+35 ] }151108]CASH (0)-APL     160108       8.00-      0.00                        ]
+36 ] }151108]CASH (0)-APL     160108     123.50-      0.00 DMV800232-52       MULT]
+37 ] }151108]CASH (0)-APL     160108    1347.25-      0.00 DMV800232-50       MULT]
+38 ] }151108]CASH (0)-RCV     150108     675.75-      0.00                        ]
+39 ]
+40 ]
+41 ]
+42 }                                                                     ]}MORE...]
+43 }F1=Help }F3=Exit }F7=Bwd }F8=Fwd }F9=Acct}Summary }F10=PolicyList }F12=Invoices
+]]></Map>
+	<Script event="oninput">
+		<IfAid key="pf1">
+			<ScreenSwitch screen="invoiceHelp"/>
+		</IfAid>
+		<IfAid key="pf3">
+			<ScreenSwitch screen="search"/>
+		</IfAid>
+		<IfAid key="pf7">
+			<PutScreen row="42" column="2" text="AT TOP OF LIST   "/>
+		</IfAid>
+		<IfAid key="pf8">
+			<ScreenSwitch screen="altScreen2"/>
+		</IfAid>
+		<IfAid key="pf9">
+			<ScreenSwitch screen="billInfo"/>
+		</IfAid>
+		<IfAid key="pf10">
+			<ScreenSwitch screen="policyList"/>
+		</IfAid>
+		<IfAid key="pf12">
+			<ScreenSwitch screen="invoice1"/>
+		</IfAid>
+		<IfAid key="clear">
+			<ScreenSwitch screen="clearScreen"/>
+		</IfAid>
+	</Script>
+</Screen>
+<Screen name="altScreen2" clear="yes">
+	<Map framed="yes" type="alternate" formatted="yes"><![CDATA[
+            1         2         3         4         5         6         7         8
+   12345678901234567890123456789012345678901234567890123456789012345678901234567890
+ 1 ]Account:[12345678            ]}Account Information]                    ]XYL1003
+ 2 ]Company:[50    ]            }Account}Transaction}List                          
+ 3 ]Policy:]}DMV800232           ]                                                 
+ 4 ]Plan:   }B2}QUARTERLY PAY PLAN         ]Status:}ACCOUNT PAID TO DATE          ]   
+ 5 ]Name:   }JONATHAN & SUE SMITH          ]]Agent:}BRING TO SELL AGENCY          ]   
+ 6          }DB BURWELL BOAT ZINCS         ]}UP3214}                              ]   
+ 7                                                                                 
+ 8 ]*]]Date]    ]Action]    ]Eff\Due]  ]Amount]   ]Min]Due] Description      ]LOB] 
+ 9 ] }151107]RENEWAL PREMIUM] 231008]  ]1447.00 ] ]   0.00]DMV800232-50]     ]MULT]
+10 ] }151107]CASH (0)-APL     160108       8.00-      0.00                        ]
+11 ] }151107]CASH (0)-APL     160108     123.50-      0.00 DMV800232-52       MULT]
+12 ] }151107]CASH (0)-APL     160108    1347.25-      0.00 DMV800232-50       MULT]
+13 ] }151107]CASH (0)-RCV     150108     675.75-      0.00                        ]
+14 ] }151107]RENEWAL PREMIUM  231008    1447.00       0.00 DMV800232-50       MULT]
+15 ] }151107]CASH (0)-APL     160108       8.00-      0.00                        ]
+16 ] }151107]CASH (0)-APL     160108     123.50-      0.00 DMV800232-52       MULT]
+17 ] 
+18 ] 
+19 ] 
+20 ] 
+21 ] 
+22 ] 
+23 ] 
+24 ] 
+25 ] 
+26 ] 
+27 ] 
+28 ] 
+29 ] 
+30 ] 
+31 ] 
+32 ] 
+33 ] 
+34 ] 
+35 ] 
+36 ] 
+37 ] 
+38 ] 
+39 ]
+40 ]
+41 ]
+42 }                                                                     ]}LAST...]
+43 }F1=Help }F3=Exit }F7=Bwd }F8=Fwd }F9=Acct}Summary }F10=PolicyList }F12=Invoices
+]]></Map>
+	<Script event="oninput">
+		<IfAid key="pf1">
+			<ScreenSwitch screen="invoiceHelp"/>
+		</IfAid>
+		<IfAid key="pf3">
+			<ScreenSwitch screen="search"/>
+		</IfAid>
+		<IfAid key="pf7">
+			<ScreenSwitch screen="altScreen"/>
+		</IfAid>
+		<IfAid key="pf8">
+			<PutScreen row="42" column="2" text="AT BOTTOM OF LIST                       "/>
+		</IfAid>
+		<IfAid key="pf9">
+			<ScreenSwitch screen="billInfo"/>
+		</IfAid>
+		<IfAid key="pf10">
+			<ScreenSwitch screen="policyList"/>
+		</IfAid>
+		<IfAid key="pf12">
+			<ScreenSwitch screen="invoice1"/>
+		</IfAid>
+		<IfAid key="clear">
+			<ScreenSwitch screen="clearScreen"/>
+		</IfAid>
+	</Script>
+</Screen>
+</SimHost>
+
